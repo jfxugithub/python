@@ -27,5 +27,11 @@ class Fib(object):
 
 
 #通过迭代打印数列
-for i in Fib():
+fi = Fib()
+for i in fi:
     print(i)
+
+#print(fi[0])   #TypeError: 'Fib' object does not support indexing
+'''
+    fi是一个迭代对象，但仍然不能通过下标进行索引，如果希望能够通过下标索引参考__getitem__
+'''
