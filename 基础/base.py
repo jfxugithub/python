@@ -112,8 +112,9 @@ sum=0
 for i in li:
     sum = sum +i
 print("0-99的和：",sum)
-
+'''
 #while循环
+'''
 li=list(range(5))
 num=len(li)
 multi=1
