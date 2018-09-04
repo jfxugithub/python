@@ -13,37 +13,39 @@ def now1() :
 f = now1;
 print("由函数："+f.__name__+"()显示")
 f()
-
+#=============================================================================================#
 
 '''
 当需要增强now函数，但是又不改变now()函数的定义，在代码运行期间动态增加功能的方式 -- 装饰器(decorator)
 '''
 
-#eg:为now()函数添加打印日志的功能
-def log1(func) :
+#eg:为now2()函数添加打印日志的功能
+def log2(func) :
     def wrapper(*args,**kw) :
         print("call %s()" % func.__name__)
         return func(*args,**kw)
     return wrapper
 
-@log1        #相当于执行了 now1 = log(now1)
-            #注意：log函数必须定义在now1前面，否则会报log未定义的错误
+@log2        #相当于执行了 now2 = log2(now2)
+            #注意：log2函数必须定义在now2前面，否则会报log2未定义的错误
 def now2() :
     print("当前时间是：",datetime.datetime.now().strftime('%y-%m-%d %H:%M:%S'))
 
 now2()    #调用的结果是
-          #call now1()
+          #call now2()
           #当前时间是： 18-08-07 13:36:41
 
 print("我其实是"+now2.__name__+"()")
 
-##由于log()是一个decorator，返回一个函数，所以，原来的now1()函数仍然存在，
-##只是现在同名的now1变量指向了新的函数，于是调用now1()将执行新函数，
-##即在log()函数中返回的wrapper()函数。
+##由于log1()是一个decorator(装饰器)，返回一个函数，所以，原来的now2()函数仍然存在，
+##只是现在同名的now2变量指向了新的函数，于是调用now2()将执行新函数，
+##即在log()2函数中返回的wrapper()函数。
 
+
+#=============================================================================================#
 #如果decorator本身需要传参，那么就需要编写一个返回decorator的高阶函数
 #eg:
-def log2(text) :
+def log3(text) :
     def decorator(func):
         def wrapper(*args, **kw):
             print(text + " %s()" % func.__name__)
@@ -52,13 +54,15 @@ def log2(text) :
         return wrapper
     return decorator
 
-@log2("execute")   #相当于now2 = log("execute")(now3)
+@log3("execute")   #相当于now3 = log3("execute")(now3)
 def now3() :
     print("当前时间是：",datetime.datetime.now().strftime('%y-%m-%d %H:%M:%S'))
 
 now3()
 print("我其实是"+now3.__name__+"()")
 
+
+#=============================================================================================#
 ##通过上面两个例子可以看出，通过装饰器，虽然执行的是nowx，但实际名字依然是wrapper
 ##这对于有些依赖函数签名的代码执行就会出错
 #eg:完整的写法
