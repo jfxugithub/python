@@ -61,4 +61,4 @@ class Student(object):
 stu = Student()
 stu.name = 'alen'
 stu.score = 89             #调用set方法
-print('%s score is %d' % (stu.name,stu.score))   #调用set方法
+print('%s score is %d' % (stu.name,stu.score))   #调用get方法
