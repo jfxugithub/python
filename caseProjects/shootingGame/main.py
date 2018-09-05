@@ -1,3 +1,6 @@
+"""
+运行环境:python3.x
+"""
 import random
 
 from people import People

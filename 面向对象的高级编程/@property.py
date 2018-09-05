@@ -37,18 +37,19 @@ print('%s score is %d' % (stu.get_name(),stu.get_score()))
 #下面的方法既能检查参数，又可以用类似属性这样简单的方式来访问类的变量
 #########################################################
 '''
-@property的的使用：把一个getter方法变成属性，只需要加上@property就可以了，
+@property的作用:保护私有变量,使私有变量像普通变量一样调用
+@property的使用：把一个getter方法变成属性，只需要加上@property就可以了，
     此时，@property本身又创建了另一个装饰器@score2.setter，负责把一个setter方法变成属性赋值，
     于是，我们就拥有一个可控的属性操作：
 '''
 class Student(object):
 
     @property
-    def score(self):
+    def score(self):                   #相当于get方法
         return self.__score
 
     @score.setter
-    def score(self,val):
+    def score(self,val):               #相当于set方法
         if not isinstance(val, int):
             raise ValueError('score must be an integer!')
 
@@ -59,5 +60,5 @@ class Student(object):
 
 stu = Student()
 stu.name = 'alen'
-stu.score = 89
-print('%s score is %d' % (stu.name,stu.score))
+stu.score = 89             #调用set方法
+print('%s score is %d' % (stu.name,stu.score))   #调用get方法
