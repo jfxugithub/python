@@ -5,8 +5,6 @@ Exception:
 import os
 import sys
 
-from django.test.utils import override_script_prefix
-
 '''
 捕获异常:
     try:
@@ -53,19 +51,20 @@ except FileNotFoundError as err_info:
 
 
 ##当解释器提供的异常无法满足需求时还可以自定义
-#检查输入的长度
+# 检查输入的长度
 class ShortInputException(Exception):
     def __init__(self, length, atleast):
-        self.length = length   #输入数据的长度
-        self.atleast = atleast #最短的长度
+        self.length = length  # 输入数据的长度
+        self.atleast = atleast  # 最短的长度
 
 
 def main():
     content = input("请输入一个不小于100的数字:")
     try:
         if len(content) < 3:
-            raise ShortInputException(len(content),3)  #人为抛出异常
+            raise ShortInputException(len(content), 3)  # 人为抛出异常
     except ShortInputException as msg:
-        print("最短长度是%d,输入的长度是%d",(msg.atleast,msg.length))
+        print("最短长度是%d,输入的长度是%d" % (msg.atleast, msg.length))
+
 
 main()
